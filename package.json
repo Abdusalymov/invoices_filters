@@ -1,0 +1,19 @@
+{
+  "name": "invoices_filter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "handlebars": "^4.1.1",
+    "jquery": "^3.3.1",
+    "template": "^0.17.5",
+    "vanilla-router": "^1.2.7"
+  }
+}

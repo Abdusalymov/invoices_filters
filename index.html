@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./style.css">
+
+  <title>SPA Demo</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script id="main-template" type="text/x-handlebars-template">
+        <div class="container-fluid bg-light">
+            <div class="header-line container">
+                <h4 class="invoice-header">Invoices</h4>
+                <div class="horizontal"></div>
+            </div>
+
+            <div class="container bg-white">
+                <h5>Actions</h5>
+                <a class="btn btn-primary item" href="#create?" role="button">Add new</a>
+            </div>
+            
+            <div class="container bg-white">
+                <h5>Invoices</h5>
+                <table class="table" id="table-invoices">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Create</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Supply</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                {{#each invoices}}
+                    <li>
+                        {{invoices.id}} 
+                    </li>
+                {{/each}}
+            </div>
+        </div>
+        <!-- <script>
+            $('#table-invoices').on('click', '.del', function(e){
+                console.log(e.target.id);
+                $.ajax({
+                    url: `https://json-server-invoices.herokuapp.com/invoices/${e.target.id}`,
+                    type: "DELETE",
+                    error: function(){
+                        onsole.log('fail getinvoices');
+                    },
+                    success: function(data){
+                        $.getInvoices();
+                    },
+                });
+            });
+        </script>  -->
+    </script>
+
+    <script id="error-template" type="text/x-handlebars-template">
+        <div class="d-flex justify-content-center align-items-center" id="main">
+            <h1 class="mr-3 pr-3 align-top border-right inline-block align-content-center">404</h1>
+            <div class="inline-block align-middle">
+                <h2 class="font-weight-normal lead" id="desc">The page you requested was not found.</h2>
+            </div>
+        </div>
+    </script>
+
+    <script id="demo" type="text/x-handlebars-template">
+        <h1>{{bookTitle}}</h1>
+        <h2>{{bookAuthor}}</h2>
+    </script>
+
+    <script id="create-invoice-template" type="text/x-handlebars-template">
+        <div class="container-fluid bg-light">
+
+            <div class="header-line container">
+                <h4 class="create-header">Create Invoices</h4>
+                <div class="horizontal"></div>
+            </div>
+
+            <div class="container bg-white">
+                <form id="myForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number:</label>
+                        <input type="text" class="form-control" name="number" id="Number" aria-describedby="emailHelp" placeholder="number">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Invoice Date:</label>
+                        <input type="date" class="form-control" name="date_created" id="InvoiceDate" placeholder="Select Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Supply Date:</label>
+                        <input type="date" class="form-control" name="date_supply" id="SupplyDate" placeholder="Select Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Comment:</label>
+                        <textarea class="form-control" name="comment" id="Comment" rows="3"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" ><a class="item" href="#?">Back</a></button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+
+        </div>
+        <script>
+            $(function() {
+                $('#myForm').submit(function(){
+                    $.post(
+                        "https://json-server-invoices.herokuapp.com/invoices", 
+                        $("#myForm").serialize(),         
+                        function(msg) {
+                            console.log(msg)
+                            $('#myForm')[0].reset();
+                            alert("Invoices added successfully!"); 
+                        }
+                    );
+                        return false;
+                });
+            })
+        </script>
+    </script>
+
+    <script src="./index.js"></script>
+</body>
+</html>
