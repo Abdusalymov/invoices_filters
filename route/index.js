@@ -14,5 +14,4 @@ let router = new Router({
         el.html(html);
     }
 });
-// window.router = router;
 export default router;

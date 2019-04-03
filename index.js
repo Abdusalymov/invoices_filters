@@ -1,60 +1,57 @@
 import $ from 'jquery';
-import {template} from './templates/index';
+import { 
+    mainPage, 
+    createIvoicePage, 
+    editPage 
+} from './templates/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import router from './route/index';
-let app = document.getElementById('app')
+let app = document.getElementById('app');
+import api from './api/index';
 
-fetch('https://json-server-invoices.herokuapp.com/db', { method: 'GET' })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        app.innerHTML = template(data);
-    }
-);
+let number;
+let id;
 
-// let router = new Router({
-//     mode: 'hash',
-//     root: '/index.html',
-//     hooks: {
-//         before: function (newPage) {
-//             console.info('Before page loads hook', newPage);
-//         }
-//     },
-//     page404: function (path) {
-//         console.log('"/' + path + '" Page not found');
-//         let html = errorTemplate();
-//         el.html(html);
-//     }
-// });
+$('#app').on('click','.edit', function(event){
+    id = event.target.dataset.id;
+    number = event.target.dataset.number;
+});
+
 
 router
-      .add('', function () {
-          console.log('Home page!!!!');
-          // app.innerHTML = 
-          // let html = mainTemplate();
-          // el.html(html);
-          // $.getInvoices();
+    .add('', function () {
+        api.getInvoices(mainPage);
+    })
+    .add('create', function () {
+        app.innerHTML = createIvoicePage();
+    })
+    .add('edit', function () {
+        app.innerHTML = editPage({"number": number, "id": id});
+    })
+    .check()
+    .addUriListener()
+    .refresh();
 
-      })
-      .add('create', function () {
-          console.log('----create Invoice page!!!!----');
-          // let html = createInvoiceTemplate();
-          // el.html(html);
-      })
-      .check()
-      .addUriListener()
-      .refresh();
+    $('#app').on('click','a', function(event){
+        event.preventDefault();
+        const target = $(event.target);
+        const href = target.attr('href');
+        router.navigateTo(href);
+    });
 
-      $('a').on('click', function(event){
-          console.log('====event work====')
-          // Block browser page load
-          event.preventDefault();
-          const target = $(event.target);
-          // Navigate to clicked url
-          const href = target.attr('href');
-          router.navigateTo(href);
-      });
+    $('#app').on('click','.del', function(event){
+        const id = event.target.id;
+        api.deleteInvoice(mainPage, id);
+    });
 
+    $('#app').on('click','#btn-save', function(event){
+        event.preventDefault();
+        api.createInvoice();
+    });
 
-// window.router = router;
+    $('#app').on('click','#btn-save-edit', function(event){
+        event.preventDefault();
+        const id = event.target.dataset.id;
+        api.editInvoice(id)
+    });
+

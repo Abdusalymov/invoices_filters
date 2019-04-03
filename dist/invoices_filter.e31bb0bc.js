@@ -20390,13 +20390,19 @@ if (typeof require !== 'undefined' && require.extensions) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.template = void 0;
+exports.editPage = exports.createIvoicePage = exports.mainPage = void 0;
 
 var Handlebars = require('handlebars');
 
-var templateScript = document.getElementById('main-template').innerHTML;
-var template = Handlebars.compile(templateScript);
-exports.template = template;
+var mainTemplate = document.getElementById('main-template').innerHTML;
+var createInvoiceTemplate = document.getElementById('create-invoice-template').innerHTML;
+var editTemplate = document.getElementById('edit-template').innerHTML;
+var mainPage = Handlebars.compile(mainTemplate);
+exports.mainPage = mainPage;
+var createIvoicePage = Handlebars.compile(createInvoiceTemplate);
+exports.createIvoicePage = createIvoicePage;
+var editPage = Handlebars.compile(editTemplate);
+exports.editPage = editPage;
 },{"handlebars":"node_modules/handlebars/lib/index.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -21098,11 +21104,72 @@ var router = new Router({
     var html = errorTemplate();
     el.html(html);
   }
-}); // window.router = router;
-
+});
 var _default = router;
 exports.default = _default;
-},{"vanilla-router":"node_modules/vanilla-router/index.js"}],"index.js":[function(require,module,exports) {
+},{"vanilla-router":"node_modules/vanilla-router/index.js"}],"api/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var api = {
+  getInvoices: function getInvoices(mainPage) {
+    _jquery.default.ajax({
+      url: 'https://json-server-invoices.herokuapp.com/db',
+      type: "GET",
+      error: function error() {
+        console.error('fail get invoices');
+      },
+      success: function success(data) {
+        app.innerHTML = mainPage(data);
+      }
+    });
+  },
+  deleteInvoice: function deleteInvoice(mainPage, id) {
+    _jquery.default.ajax({
+      url: "https://json-server-invoices.herokuapp.com/invoices/".concat(id),
+      type: "DELETE",
+      error: function error() {
+        console.error('fail delete invoice');
+      },
+      success: function success() {
+        api.getInvoices(mainPage);
+      }
+    });
+  },
+  editInvoice: function editInvoice(id) {
+    _jquery.default.ajax({
+      url: "https://json-server-invoices.herokuapp.com/invoices/".concat(id),
+      type: "PUT",
+      data: (0, _jquery.default)("#editForm").serialize(),
+      error: function error() {
+        console.error('fail dit invoice');
+      },
+      success: function success() {
+        (0, _jquery.default)('#editForm')[0].reset();
+        alert('edited successfully!');
+      }
+    });
+  },
+  createInvoice: function createInvoice() {
+    _jquery.default.post("https://json-server-invoices.herokuapp.com/invoices", (0, _jquery.default)("#myForm").serialize(), function () {
+      (0, _jquery.default)('#myForm')[0].reset();
+      alert("Invoices added successfully!");
+    });
+
+    return false;
+  }
+};
+var _default = api;
+exports.default = _default;
+},{"jquery":"node_modules/jquery/dist/jquery.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -21113,51 +21180,53 @@ require("bootstrap/dist/css/bootstrap.min.css");
 
 var _index2 = _interopRequireDefault(require("./route/index"));
 
+var _index3 = _interopRequireDefault(require("./api/index"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = document.getElementById('app');
-fetch('https://json-server-invoices.herokuapp.com/db', {
-  method: 'GET'
-}).then(function (response) {
-  return response.json();
-}).then(function (data) {
-  app.innerHTML = (0, _index.template)(data);
-}); // let router = new Router({
-//     mode: 'hash',
-//     root: '/index.html',
-//     hooks: {
-//         before: function (newPage) {
-//             console.info('Before page loads hook', newPage);
-//         }
-//     },
-//     page404: function (path) {
-//         console.log('"/' + path + '" Page not found');
-//         let html = errorTemplate();
-//         el.html(html);
-//     }
-// });
+var number;
+var id;
+(0, _jquery.default)('#app').on('click', '.edit', function (event) {
+  id = event.target.dataset.id;
+  number = event.target.dataset.number;
+});
 
 _index2.default.add('', function () {
-  console.log('Home page!!!!'); // app.innerHTML = 
-  // let html = mainTemplate();
-  // el.html(html);
-  // $.getInvoices();
+  _index3.default.getInvoices(_index.mainPage);
 }).add('create', function () {
-  console.log('----create Invoice page!!!!----'); // let html = createInvoiceTemplate();
-  // el.html(html);
+  app.innerHTML = (0, _index.createIvoicePage)();
+}).add('edit', function () {
+  app.innerHTML = (0, _index.editPage)({
+    "number": number,
+    "id": id
+  });
 }).check().addUriListener().refresh();
 
-(0, _jquery.default)('a').on('click', function (event) {
-  console.log('====event work===='); // Block browser page load
-
+(0, _jquery.default)('#app').on('click', 'a', function (event) {
   event.preventDefault();
-  var target = (0, _jquery.default)(event.target); // Navigate to clicked url
-
+  var target = (0, _jquery.default)(event.target);
   var href = target.attr('href');
 
   _index2.default.navigateTo(href);
-}); // window.router = router;
-},{"jquery":"node_modules/jquery/dist/jquery.js","./templates/index":"templates/index.js","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","./route/index":"route/index.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+});
+(0, _jquery.default)('#app').on('click', '.del', function (event) {
+  var id = event.target.id;
+
+  _index3.default.deleteInvoice(_index.mainPage, id);
+});
+(0, _jquery.default)('#app').on('click', '#btn-save', function (event) {
+  event.preventDefault();
+
+  _index3.default.createInvoice();
+});
+(0, _jquery.default)('#app').on('click', '#btn-save-edit', function (event) {
+  event.preventDefault();
+  var id = event.target.dataset.id;
+
+  _index3.default.editInvoice(id);
+});
+},{"jquery":"node_modules/jquery/dist/jquery.js","./templates/index":"templates/index.js","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","./route/index":"route/index.js","./api/index":"api/index.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -21185,7 +21254,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37647" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42147" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
