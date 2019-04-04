@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { 
-    mainPage, 
+    // mainPage, 
     createIvoicePage, 
     editPage 
 } from './templates/index';
@@ -20,7 +20,7 @@ $('#app').on('click','.edit', function(event){
 
 router
     .add('', function () {
-        api.getInvoices(mainPage);
+        api.getInvoices();
     })
     .add('create', function () {
         app.innerHTML = createIvoicePage();
@@ -41,7 +41,7 @@ router
 
     $('#app').on('click','.del', function(event){
         const id = event.target.id;
-        api.deleteInvoice(mainPage, id);
+        api.deleteInvoice(id);
     });
 
     $('#app').on('click','#btn-save', function(event){
@@ -53,5 +53,11 @@ router
         event.preventDefault();
         const id = event.target.dataset.id;
         api.editInvoice(id)
+    });
+
+    $('#app').on('click','#go', function(){
+        const search = document.getElementById('search');
+        api.getInvoicesByFilter(search.value)
+        console.log(search.value);
     });
 

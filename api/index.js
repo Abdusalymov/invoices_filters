@@ -1,9 +1,11 @@
 import $ from 'jquery';
-
+import { 
+    mainPage 
+} from '../templates/index';
 const api =  {
-    getInvoices: mainPage => {
+    getInvoices: ()=> {
         $.ajax({
-            url: 'https://json-server-invoices.herokuapp.com/db',
+            url: 'https://json-server-invoices.herokuapp.com/invoices',
             type: "GET",
             error: function(){
                 console.error('fail get invoices');
@@ -14,7 +16,7 @@ const api =  {
         });
     },
 
-    deleteInvoice: (mainPage, id) => {
+    deleteInvoice: (id) => {
         $.ajax({
             url: `https://json-server-invoices.herokuapp.com/invoices/${id}`,
             type: "DELETE",
@@ -53,6 +55,19 @@ const api =  {
             }
         );
             return false;
+    },
+    getInvoicesByFilter: (text) => {
+        $.ajax({
+            url: `https://json-server-invoices.herokuapp.com/invoices?q=${text}`,
+            type: "GET",
+            error: function(){
+                console.error('fail get invoices');
+            },
+            success: function(data){
+                console.log(data);
+                app.innerHTML = mainPage(data)
+            },
+        });
     }
 }
 

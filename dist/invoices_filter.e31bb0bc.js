@@ -21117,22 +21117,24 @@ exports.default = void 0;
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
+var _index = require("../templates/index");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var api = {
-  getInvoices: function getInvoices(mainPage) {
+  getInvoices: function getInvoices() {
     _jquery.default.ajax({
-      url: 'https://json-server-invoices.herokuapp.com/db',
+      url: 'https://json-server-invoices.herokuapp.com/invoices',
       type: "GET",
       error: function error() {
         console.error('fail get invoices');
       },
       success: function success(data) {
-        app.innerHTML = mainPage(data);
+        app.innerHTML = (0, _index.mainPage)(data);
       }
     });
   },
-  deleteInvoice: function deleteInvoice(mainPage, id) {
+  deleteInvoice: function deleteInvoice(id) {
     _jquery.default.ajax({
       url: "https://json-server-invoices.herokuapp.com/invoices/".concat(id),
       type: "DELETE",
@@ -21140,7 +21142,7 @@ var api = {
         console.error('fail delete invoice');
       },
       success: function success() {
-        api.getInvoices(mainPage);
+        api.getInvoices(_index.mainPage);
       }
     });
   },
@@ -21165,11 +21167,24 @@ var api = {
     });
 
     return false;
+  },
+  getInvoicesByFilter: function getInvoicesByFilter(text) {
+    _jquery.default.ajax({
+      url: "https://json-server-invoices.herokuapp.com/invoices?q=".concat(text),
+      type: "GET",
+      error: function error() {
+        console.error('fail get invoices');
+      },
+      success: function success(data) {
+        console.log(data);
+        app.innerHTML = (0, _index.mainPage)(data);
+      }
+    });
   }
 };
 var _default = api;
 exports.default = _default;
-},{"jquery":"node_modules/jquery/dist/jquery.js"}],"index.js":[function(require,module,exports) {
+},{"jquery":"node_modules/jquery/dist/jquery.js","../templates/index":"templates/index.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -21193,7 +21208,7 @@ var id;
 });
 
 _index2.default.add('', function () {
-  _index3.default.getInvoices(_index.mainPage);
+  _index3.default.getInvoices();
 }).add('create', function () {
   app.innerHTML = (0, _index.createIvoicePage)();
 }).add('edit', function () {
@@ -21213,7 +21228,7 @@ _index2.default.add('', function () {
 (0, _jquery.default)('#app').on('click', '.del', function (event) {
   var id = event.target.id;
 
-  _index3.default.deleteInvoice(_index.mainPage, id);
+  _index3.default.deleteInvoice(id);
 });
 (0, _jquery.default)('#app').on('click', '#btn-save', function (event) {
   event.preventDefault();
@@ -21225,6 +21240,13 @@ _index2.default.add('', function () {
   var id = event.target.dataset.id;
 
   _index3.default.editInvoice(id);
+});
+(0, _jquery.default)('#app').on('click', '#go', function () {
+  var search = document.getElementById('search');
+
+  _index3.default.getInvoicesByFilter(search.value);
+
+  console.log(search.value);
 });
 },{"jquery":"node_modules/jquery/dist/jquery.js","./templates/index":"templates/index.js","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","./route/index":"route/index.js","./api/index":"api/index.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -21254,7 +21276,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42147" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35419" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
