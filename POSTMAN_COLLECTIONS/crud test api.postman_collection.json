@@ -71,7 +71,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://json-server-invoices.herokuapp.com/invoices",
+					"raw": "https://json-server-invoices.herokuapp.com/invoices/5ac1f09a60edb54701c767da",
 					"protocol": "https",
 					"host": [
 						"json-server-invoices",
@@ -79,7 +79,8 @@
 						"com"
 					],
 					"path": [
-						"invoices"
+						"invoices",
+						"5ac1f09a60edb54701c767da"
 					]
 				}
 			},
@@ -132,15 +133,36 @@
 		},
 		{
 			"name": "change invoices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a7efc25-0beb-4a19-913d-42dfe4a24977",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"id\": \"5ac1f09a60edb54701c767da\",\n        \"direction\": \"8ad47368-b85b-4b25-a209-9a975fa85ba1THIS CHANGE\",\n        \"number\": 55958,\n        \"date_created\": \"07 May 1973\",\n        \"date_due\": \"15 August 2009THIS CHANGE\",\n        \"date_supply\": \"28 May 2004\",\n        \"comment\": \"Officia cillum fugiat aliqua dolor sint adipisicing anim elit ipsum proident pariatur veniam laborum in. Fugiat deserunt cillum ad irure excepteur occaecat. Exercitation nisi minim aliqua et proident.\"\n    }"
+					"raw": "{\n        \n        \"direction\": \"8ad47368-b85b-4b25-a209-9a975fa85ba1THIS CHANGE\",\n        \"number\": 55958,\n        \"date_created\": \"07 May 1973\",\n        \"date_due\": \"15 August 2009THIS CHANGE\",\n        \"date_supply\": \"28 May 2004\",\n        \"comment\": \"Officia cillum fugiat aliqua dolor sint adipisicing anim elit ipsum proident pariatur veniam laborum in. Fugiat deserunt cillum ad irure excepteur occaecat. Exercitation nisi minim aliqua et proident.\"\n    }"
 				},
 				"url": {
-					"raw": "https://json-server-invoices.herokuapp.com/invoices/5ac1f09a60edb54701c767da",
+					"raw": "https://json-server-invoices.herokuapp.com/invoices/5ac1f09af3535ad5cf96a221",
 					"protocol": "https",
 					"host": [
 						"json-server-invoices",
@@ -149,7 +171,7 @@
 					],
 					"path": [
 						"invoices",
-						"5ac1f09a60edb54701c767da"
+						"5ac1f09af3535ad5cf96a221"
 					]
 				}
 			},
