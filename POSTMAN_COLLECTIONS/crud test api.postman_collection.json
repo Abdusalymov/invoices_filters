@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "e1f5e060-ff63-474c-9c4e-42ff331b77f9",
+		"name": "crud test api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get invoices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41fa916f-8fb5-4acc-9ba0-218713c4c8d0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://json-server-invoices.herokuapp.com/invoices",
+					"protocol": "https",
+					"host": [
+						"json-server-invoices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete invoice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ea5f9f0-5797-487f-810f-c2d873147c58",
+						"exec": [
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+							"    console.log(response.json());",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://json-server-invoices.herokuapp.com/invoices",
+					"protocol": "https",
+					"host": [
+						"json-server-invoices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create invoice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7ff293b-5472-415d-9eee-75f7aeaa9fda",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"5555555555\",\n        \"direction\": \"8ad47368-b85b-4b25-a209-9a975fa85ba1\",\n        \"number\": 55958,\n        \"date_created\": \"07 May 1973\",\n        \"date_due\": \"15 August 2009555\",\n        \"date_supply\": \"28 May 2004555\",\n        \"comment\": \"Officia cillum fugiat aliqua dolor sint adipisicing anim elit ipsum proident pariatur veniam laborum in. Fugiat deserunt cillum ad irure excepteur occaecat. Exercitation nisi minim aliqua et proident.\"\n}"
+				},
+				"url": {
+					"raw": "https://json-server-invoices.herokuapp.com/invoices",
+					"protocol": "https",
+					"host": [
+						"json-server-invoices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change invoices",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"5ac1f09a60edb54701c767da\",\n        \"direction\": \"8ad47368-b85b-4b25-a209-9a975fa85ba1THIS CHANGE\",\n        \"number\": 55958,\n        \"date_created\": \"07 May 1973\",\n        \"date_due\": \"15 August 2009THIS CHANGE\",\n        \"date_supply\": \"28 May 2004\",\n        \"comment\": \"Officia cillum fugiat aliqua dolor sint adipisicing anim elit ipsum proident pariatur veniam laborum in. Fugiat deserunt cillum ad irure excepteur occaecat. Exercitation nisi minim aliqua et proident.\"\n    }"
+				},
+				"url": {
+					"raw": "https://json-server-invoices.herokuapp.com/invoices/5ac1f09a60edb54701c767da",
+					"protocol": "https",
+					"host": [
+						"json-server-invoices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"invoices",
+						"5ac1f09a60edb54701c767da"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
