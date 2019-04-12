@@ -24,6 +24,7 @@ const api =  {
                 console.error('fail delete invoice');
             },
             success: function(){
+                alert("Invoices was deleted!")
                api.getInvoices(mainPage);
             },
         });
