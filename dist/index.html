@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="stylesheet" href="style.f108d155.css"><title>SPA Demo</title><link rel="stylesheet" href="invoices_filter.6cab3070.css"></head><body> <div id="app"></div> <script id="main-template" type="text/x-handlebars-template">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="stylesheet" href="/style.97603ff2.css"><title>SPA Demo</title><link rel="stylesheet" href="/invoices_filters.1fa0a5bd.css"></head><body> <div id="app"></div> <script id="main-template" type="text/x-handlebars-template">
         <div class="container-fluid bg-light">
             <div class="header-line container">
                 <h4 class="invoice-header">Invoices</h4>
@@ -44,10 +44,12 @@
                                 <td>{{this.date_supply}}</td>
                                 <td>{{this.comment}}</td>
                                 <td>
-                                    <a class="edit btn btn-primary item"  href="#edit?" role="button" data-number={{this.number}} data-id={{this.id}}>Edit</a>
-                                    <button type="button" class="del btn btn-danger" id={{this.id}}>
-                                        Delete
-                                    </button>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a class="edit btn btn-primary item"  href="#edit?" role="button" data-number={{this.number}} data-id={{this.id}}>Edit</a>
+                                        <button type="button" class="del btn btn-danger" id={{this.id}}>
+                                            Delete
+                                        </button>
+                                    </div> 
                                 </td>
                             </tr>
                         {{/each}}
@@ -125,5 +127,4 @@
                     </form>
                 </div>
             </div>
-    </script> <script src="invoices_filter.d5f094d9.js"></script>
-</body></html>
+    </script> <script src="/invoices_filters.c5c070ff.js"></script> </body></html>
