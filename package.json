@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "newman run -e ./POSTMAN_COLLECTIONS/comment.postman_environment.json -g ./POSTMAN_COLLECTIONS/global.postman_globals.json"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,7 +11,6 @@
     "bootstrap": "^4.3.1",
     "handlebars": "^4.1.1",
     "jquery": "^3.3.1",
-    "newman": "^4.4.1",
     "template": "^0.17.5",
     "vanilla-router": "^1.2.7"
   },

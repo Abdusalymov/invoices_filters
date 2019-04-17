@@ -7,3 +7,14 @@ node_js:
 branches:
   only:
     - master
+
+install:
+  - npm install newman
+
+efore_script:
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+
+script:
+  - node_modules/.bin/newman run POSTMAN_COLLECTIONS/comment.postman_environment.json -g POSTMAN_COLLECTIONS/global.postman_globals.json
