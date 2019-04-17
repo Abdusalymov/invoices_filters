@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "newman run -e POSTMAN_COLLECTIONS/comment.postman_environment.json -g POSTMAN_COLLECTIONS/global.postman_globals.json"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "bootstrap": "^4.3.1",
     "handlebars": "^4.1.1",
     "jquery": "^3.3.1",
+    "newman": "^4.4.1",
     "template": "^0.17.5",
     "vanilla-router": "^1.2.7"
   },
