@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "newman run -e POSTMAN_COLLECTIONS/comment.postman_environment.json -g POSTMAN_COLLECTIONS/global.postman_globals.json"
+    "test": "newman run -e ./POSTMAN_COLLECTIONS/comment.postman_environment.json -g ./POSTMAN_COLLECTIONS/global.postman_globals.json"
   },
   "keywords": [],
   "author": "",
