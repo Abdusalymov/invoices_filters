@@ -21374,6 +21374,7 @@ var api = {
         console.error('fail delete invoice');
       },
       success: function success() {
+        alert("Invoices was deleted!");
         api.getInvoices(_index.mainPage);
       }
     });
