@@ -11340,7 +11340,15 @@ exports.__esModule = true;
 
 exports['default'] = function (instance) {
   instance.registerHelper('lookup', function (obj, field) {
-    return obj && obj[field];
+    if (!obj) {
+      return obj;
+    }
+
+    if (field === 'constructor' && !obj.propertyIsEnumerable(field)) {
+      return undefined;
+    }
+
+    return obj[field];
   });
 };
 
@@ -11555,7 +11563,7 @@ var _logger = require('./logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 
-var VERSION = '4.1.1';
+var VERSION = '4.1.2';
 exports.VERSION = VERSION;
 var COMPILER_REVISION = 7;
 exports.COMPILER_REVISION = COMPILER_REVISION;
@@ -21473,6 +21481,11 @@ _index2.default.add('', function () {
 
   console.log(search.value);
 });
+(0, _jquery.default)('#app').on('click', '#input_button_bg_change', function () {
+  var body = document.getElementsByTagName('body')[0];
+  var colors = ['grey', 'black', 'white'];
+  body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+});
 },{"jquery":"node_modules/jquery/dist/jquery.js","./templates/index":"templates/index.js","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","./route/index":"route/index.js","./api/index":"api/index.js"}],"../../../Users/irbis/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -21501,7 +21514,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53107" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53575" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

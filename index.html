@@ -11,18 +11,21 @@
     <div id="app"></div>
 
     <script id="main-template" type="text/x-handlebars-template">
-        <div class="container-fluid bg-light">
+        
+
+        <div class="container-fluid">
+            
             <div class="header-line container">
                 <h4 class="invoice-header">Invoices</h4>
                 <div class="horizontal"></div>
             </div>
 
-            <div class="container bg-white">
+            <div class="container bg-secondary">
                 <h5>Actions</h5>
                 <a class="btn btn-primary item" href="#create?" role="button">Add new</a>
             </div>
             
-            <div class="container">
+            <div class="container bg-secondary">
                 <div class="row">
                     <div class="form-group row">
                         <label for="search" class="col-sm-2 col-form-label">Search:</label>
@@ -36,7 +39,7 @@
                </button> 
             </div>
 
-            <div class="container bg-white">
+            <div class="container bg-secondary">
                 <h5>Invoices</h5>
                 <table class="table" id="table-invoices">
                     <thead class="thead-light">
@@ -69,6 +72,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="container bg-secondary">
+                <button type="button" class="del btn btn-primary" id="input_button_bg_change">
+                        Изменить цвет фона
+                </button>
+            </div>
         </div>
     </script>
 
@@ -89,7 +97,7 @@
                 <div class="horizontal"></div>
             </div>
 
-            <div class="container bg-white">
+            <div class="container bg-secondary">
                 <form id="myForm">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Number:</label>
@@ -121,7 +129,7 @@
                     <div class="horizontal"></div>
                 </div>
     
-                <div class="container bg-white">
+                <div class="container bg-secondary">
                     <form id="editForm">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Number:</label>
@@ -146,7 +154,6 @@
                 </div>
             </div>
     </script>
-
     <script src="./index.js"></script>
 </body>
 </html>
