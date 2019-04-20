@@ -62,7 +62,7 @@ router
     });
     $('#app').on('click','#input_button_bg_change', function(){
         var body = document.getElementsByTagName('body')[0];
-        var colors = ['grey', 'black', 'white'];
+        var colors = ['grey', 'black', 'white', 'blue'];
         body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
     });
 
