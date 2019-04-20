@@ -34,7 +34,7 @@ then
 
     # Copy builded ember application from 'dist' directory into 'repository/${TRAVIS_BRANCH}'.
     echo "Copy application (for ${TRAVIS_BRANCH} branch)."
-    cp -r ../src/* "${TRAVIS_BRANCH}"
+    cp -r ../dist/* "${TRAVIS_BRANCH}"
     cd "${TRAVIS_BRANCH}"
     ls -l
     cd ..
