@@ -21483,7 +21483,7 @@ _index2.default.add('', function () {
 });
 (0, _jquery.default)('#app').on('click', '#input_button_bg_change', function () {
   var body = document.getElementsByTagName('body')[0];
-  var colors = ['grey', 'black', 'white'];
+  var colors = ['grey', 'black', 'white', 'blue'];
   body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 });
 },{"jquery":"node_modules/jquery/dist/jquery.js","./templates/index":"templates/index.js","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","./route/index":"route/index.js","./api/index":"api/index.js"}],"../../../Users/irbis/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -21514,7 +21514,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53575" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50172" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
