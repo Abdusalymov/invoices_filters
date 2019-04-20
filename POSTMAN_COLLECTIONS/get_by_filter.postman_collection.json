@@ -29,9 +29,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{uri}}{{created}}",
+					"raw": "{{uri}}?date_created=19 October 1980",
 					"host": [
-						"{{uri}}{{created}}"
+						"{{uri}}?date_created=19 October 1980"
 					]
 				}
 			},
