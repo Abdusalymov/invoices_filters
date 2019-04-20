@@ -47,9 +47,9 @@ then
       touch .gitkeep
     fi
 
-    # # Configure git.
-    # git config user.name "ehaberev"
-    # git config user.email "ekhaberev@ics.perm.ru"
+    # Configure git.
+    git config user.name "Abdusalymov"
+    git config user.email "irbis180288@yandex.ru"
 
     echo "Commit & push changes."
     git add --all
