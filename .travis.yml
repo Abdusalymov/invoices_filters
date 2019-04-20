@@ -4,11 +4,6 @@ language: node_js
 node_js:
   - 9
 
-branches:
-  only:
-    - master
-    - develop
-
 install:
   - npm install newman
   - npm install parcel-bundler
