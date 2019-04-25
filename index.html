@@ -56,10 +56,12 @@
                                 <td>{{this.date_supply}}</td>
                                 <td>{{this.comment}}</td>
                                 <td>
-                                    <a class="edit btn btn-primary item"  href="#edit?" role="button" data-number={{this.number}} data-id={{this.id}}>Edit</a>
-                                    <button type="button" class="del btn btn-danger" id={{this.id}}>
-                                        Delete
-                                    </button>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a class="edit btn btn-primary item"  href="#edit?" role="button" data-number={{this.number}} data-id={{this.id}}>Edit</a>
+                                        <button type="button" class="del btn btn-danger" id={{this.id}}>
+                                            Delete
+                                        </button>
+                                    </div> 
                                 </td>
                             </tr>
                         {{/each}}
